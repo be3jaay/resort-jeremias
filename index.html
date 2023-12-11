@@ -45,7 +45,43 @@
             <h4><span>Best Resort</span> <br>for your vacation</h4>
             <p>Discover a world where luxury meets nature at Jeremias,<br> 
             where every moment is a celebration of beauty and tranquility.</p>
-            <button class="book-now-btn" id="reserve_room">Book Now <i class="fa-solid fa-arrow-right"></i></button>         
+            <button class="book-now-btn" id="reserve_room">Book Now <i class="fa-solid fa-arrow-right"></i></button>   
+            <div class="modal_1" id="myModal">
+              <div class="modal-content_1">
+                  <span class="close_1" onclick="closeModal()">&times;</span>
+                  <h2 class="form-header">Jeremias Resort</h2>
+                  <form class="form">
+                    <p class="title">Basic Details </p>
+                    <p class="message">Book your desired schedule: </p>
+                        <div class="flex">
+                        <label>
+                            <input required="" placeholder="" type="text" class="input">
+                            <span>Full Name</span>
+                        </label>
+                        </div>      
+                    <label>
+                        <input required="" placeholder="" type="email" class="input">
+                        <span>Email</span>
+                    </label> 
+                        
+                    <label>
+                        <input required="" placeholder="" type="number" class="input">
+                        <span>Phone Number</span>
+                    </label>
+                    <label>
+                        <input required="" placeholder="" type="date" class="input">
+                        
+                    </label>
+                    <button type="button" id="submitBtn" class="submit">Submit</button>
+                    <div id="confirmationModal" class="modal_2">
+                      <h2>Thank you!</h2>
+                      <p>We will contact you as soon as possible.</p>
+                      <button type="button" id="closeConfirmationBtn" class="submit">Close</button>
+                  </div> 
+                  <div class="overlay"></div>
+                    
+                  </form>
+              </div>      
         </div>
         <div class="frame">
             <img src="images/frame.png" alt="">
@@ -55,14 +91,14 @@
     <section class="service-section">
         <div class="service-title" data-aos ="zoom-in-up" data-aos-delay="100" data-aos-duration="1000">
             <h2>What we do</h2>
-        </div>
+        </div>  
         <div class="service-container"> 
             <div class="service-info" data-aos ="zoom-in-up" data-aos-delay="100" data-aos-duration="1000">
                 <h3>Explore the Relaxing Place in Laguna</h3>
                 <p>
                     Discover a world where luxury meets nature 
                 at Jeremias, Where every moment is a celebration of beauty and tranquility.</p>
-                <button class="book-now-btn">Learn More <i class="fa-solid fa-circle-info"></i></button>
+                <button class="book-now-btn"> <a href="about_us.html">Learn More<i class="fa-solid fa-circle-info"></i></a></button>
             </div>
             <div class="service-image" data-aos ="zoom-in-left" data-aos-delay="100" data-aos-duration="1000">
                 <img src="images/service-img.png" alt="">
@@ -255,11 +291,49 @@
       
    
 
-  
-      
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
+
+    function openModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "flex";
+    }
+
+    
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+    document.getElementById("reserve_room").addEventListener("click", openModal);
+    
+    $(document).ready(function () {
+        // Show input modal initially
+        $('#inputModal, .overlay').show();
+
+        // Submit button click event
+        $('#submitBtn').click(function () {
+            // Hide input modal
+            $('#inputModal, .overlay').hide();
+
+            // Show confirmation modal
+            $('#confirmationModal, .overlay').show();
+        });
+
+        // Close confirmation modal
+        $('#closeConfirmationBtn').click(function () {
+            // Hide confirmation modal
+            $('#confirmationModal, .overlay').hide();
+
+            // Reset input modal for reuse
+            $('#form')[0].reset();
+
+            // Show input modal
+            $('#inputModal, .overlay').show();
+        });
+    });
+
       AOS.init();
       var swiper = new Swiper(".mySwiper", {
       slidesPerView: 3,

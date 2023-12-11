@@ -1,4 +1,4 @@
-
+<?php require_once('./config.php'); ?>
  <!DOCTYPE html>
 <html lang="en" class="" style="height: auto;">
 
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link
   rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-  <title> Jeremias Resort </title>
+  <title> Jeremias Title </title>
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <style>
@@ -18,7 +18,7 @@
 
 
 </style>
-
+<?php require_once('inc/header.php') ?>
 
 
   <body class="layout-top-nav layout-fixed layout-navbar-fixed" style="height: auto;">
@@ -192,6 +192,38 @@
 
   
 
+    <div class="wrapper">
+     <?php $page = isset($_GET['page']) ? $_GET['page'] : 'home';  ?>
+     <?php require_once('inc/topBarNav.php') ?>
+     <?php if($_settings->chk_flashdata('success')): ?>
+      <script>
+        alert_toast("<?php echo $_settings->flashdata('success') ?>",'success')
+      </script>
+      <?php endif;?>    
+
+      <!-- Content Wrapper. Contains page content -->
+     
+      <?php 
+          $rooms = $conn->query("SELECT * FROM room_list where delete_flag =0 and status = 1 order by name asc");
+          while($row = $rooms->fetch_assoc()):
+          ?>
+           
+        <?php endwhile; ?>
+
+        
+          <div class="container">
+            <?php 
+              if(!file_exists($page.".php") && !is_dir($page)){
+                  
+              }else{
+                if(is_dir($page))
+                  include $page.'/index.php';
+                else
+                  include $page.'.php';
+
+              }
+            ?>
+          </div>
         
    
         <div class="modal fade rounded-0" id="confirm_modal" role='dialog'>
@@ -252,6 +284,10 @@
         
 </div>
       <!-- /. CONNECTED ITO SA RESEVATION -->
+      
+   
+
+      <?php require_once('inc/footer.php') ?> 
  
   
       
